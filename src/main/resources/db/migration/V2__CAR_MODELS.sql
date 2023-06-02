@@ -1,0 +1,36 @@
+CREATE TABLE car_models (
+	id_brand int NOT NULL,
+	model_code int NOT NULL,
+	model_name varchar NOT NULL,
+	CONSTRAINT car_models_pk PRIMARY KEY (id_brand,model_code),
+    CONSTRAINT car_models_fk FOREIGN KEY (id_brand) REFERENCES car_brands (id_brand)
+);
+
+insert into car_models (id_brand, model_code, model_name) values 
+(1, 100, 'DB5'),
+(1, 101, 'DB9'),
+(1, 102, 'Vantage'),
+(2, 200, '458 Italia'),
+(2, 201, 'F40'),
+(2, 202, 'LaFerrari'),
+(3, 300, 'Aventador'),
+(3, 301, 'Huracán'),
+(3, 302, 'Gallardo'),
+(4, 400, 'F-Type'),
+(4, 401, 'XJ'),
+(4, 402, 'E-Type'),
+(5, 500, '911'),
+(5, 501, 'Cayenne'),
+(5, 502, 'Panamera'),
+(6, 600, 'Serie 3'),
+(6, 601, 'Serie 5'),
+(6, 602, 'X5'),
+(7, 700, 'Mustang'),
+(7, 701, 'F-150'),
+(7, 702, 'Focus'),
+(8, 800, 'Model S'),
+(8, 801, 'Model 3'),
+(8, 802, 'Model X'),
+(9, 900, 'Camry'),
+(9, 901, 'Corolla'),
+(9, 902, 'Land Cruiser');

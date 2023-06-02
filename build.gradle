@@ -10,7 +10,22 @@ repositories {
 }
 
 dependencies {
-    implementation "org.joinfaces:jsf-spring-boot-starter"
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
+    implementation "org.joinfaces:jsf-spring-boot-starter"
+    implementation "org.flywaydb:flyway-core"
+    implementation "com.zaxxer:HikariCP"
+    implementation "org.primefaces:primefaces:${primefacesVersion}:jakarta"
+    implementation "org.webjars:bootstrap:${webJarsVersion}"
+    implementation "org.webjars.npm:primeflex:${primeflexVersion}"
+
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+
+    runtimeOnly "org.postgresql:postgresql"
+    
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }

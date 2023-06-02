@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>New Car</title>
+  <h:outputStylesheet library="webjars" name="primeflex/3.3.0/primeflex.min.css" />
+</h:head>
+
+<h:body>
+  <h:form id="carForm">
+
+    <br />
+
+    <div class="grid ui-fluid">
+
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <span class="ui-float-label">
+            <p:inputText value="#{saveCarBean.car.mark}" />
+            <p:outputLabel for="@previous" value="Mark" />
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <span class="ui-float-label">
+            <p:inputText value="#{saveCarBean.car.model}" />
+            <p:outputLabel for="@previous" value="Model" />
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <span class="ui-float-label">
+            <p:inputText value="#{saveCarBean.car.color}" />
+            <p:outputLabel for="@previous" value="Color" />
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </h:form>
+
+
+</h:body>
+
+</html>
