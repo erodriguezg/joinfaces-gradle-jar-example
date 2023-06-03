@@ -1,4 +1,4 @@
-package org.joinfaces.example.infraestructure.mybatis.mapper;
+package org.joinfaces.example.infrastructure.mybatis.mapper;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.joinfaces.example.core.model.CarBrand;
 @Mapper
 public interface CarBrandMapper {
 
-    @Results(id = "carBrandMapper", value = {
+    @Results(id = "carBrandMapperResults", value = {
             @Result(property = "idBrand", column = "id_brand", id = true),
             @Result(property = "nameBrand", column = "name_brand"),
             @Result(property = "country", column = "country")

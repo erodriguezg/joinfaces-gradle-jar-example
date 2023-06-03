@@ -1,10 +1,10 @@
-package org.joinfaces.example.infraestructure.mybatis;
+package org.joinfaces.example.infrastructure.mybatis;
 
 import java.util.List;
 
 import org.joinfaces.example.core.model.CarBrand;
 import org.joinfaces.example.core.repository.CarBrandRepository;
-import org.joinfaces.example.infraestructure.mybatis.mapper.CarBrandMapper;
+import org.joinfaces.example.infrastructure.mybatis.mapper.CarBrandMapper;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,5 +19,5 @@ public class CarBrandMybatis implements CarBrandRepository {
     public List<CarBrand> findAll() {
         return this.mapper.findAll();
     }
-    
+
 }

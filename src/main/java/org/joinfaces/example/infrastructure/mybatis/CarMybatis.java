@@ -1,10 +1,11 @@
-package org.joinfaces.example.infraestructure.mybatis;
+package org.joinfaces.example.infrastructure.mybatis;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.repository.CarRepository;
-import org.joinfaces.example.infraestructure.mybatis.mapper.CarMapper;
+import org.joinfaces.example.infrastructure.mybatis.mapper.CarMapper;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,15 @@ public class CarMybatis implements CarRepository {
 
     @Override
     public void saveCar(Car car) {
-        this.mapper.saveCar(car);
+        if (car == null) {
+            throw new IllegalArgumentException("the input car must not be null");
+        }
+        if (car.getIdCar() == null) {
+            car.setIdCar(UUID.randomUUID());
+            this.mapper.insertCar(car);
+        } else {
+            this.mapper.deleteCar(car);
+        }
     }
 
     @Override

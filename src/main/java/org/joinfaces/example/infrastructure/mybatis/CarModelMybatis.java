@@ -1,11 +1,11 @@
-package org.joinfaces.example.infraestructure.mybatis;
+package org.joinfaces.example.infrastructure.mybatis;
 
 import java.util.List;
 
 import org.joinfaces.example.core.model.CarBrand;
 import org.joinfaces.example.core.model.CarModel;
 import org.joinfaces.example.core.repository.CarModelRepository;
-import org.joinfaces.example.infraestructure.mybatis.mapper.CarModelMapper;
+import org.joinfaces.example.infrastructure.mybatis.mapper.CarModelMapper;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;

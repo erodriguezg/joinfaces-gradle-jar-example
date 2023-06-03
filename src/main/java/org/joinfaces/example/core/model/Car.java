@@ -14,9 +14,9 @@ public class Car implements Serializable {
     @EqualsAndHashCode.Include
     private UUID idCar;
 
-    private CarBrand brand;
+    private Integer idBrand;
 
-    private CarModel model;
+    private Integer modelCode;
 
     private String color;
 
