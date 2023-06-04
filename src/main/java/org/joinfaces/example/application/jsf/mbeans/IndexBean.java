@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.joinfaces.example.core.dto.CarViewDto;
+import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.service.CarService;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DialogFrameworkOptions;
@@ -40,7 +41,7 @@ public class IndexBean implements Serializable {
     public void openCarDialogAction(CarViewDto carView) {
         log.info("===> enter to openNewCarDialogAction");
 
-        var car = carView.toNewCar();
+        var car = carView != null ? carView.toNewCar() : new Car();
 
         var options = DialogFrameworkOptions.builder()
                 .modal(true)

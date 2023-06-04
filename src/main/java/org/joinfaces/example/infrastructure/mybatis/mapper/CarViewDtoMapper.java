@@ -24,7 +24,7 @@ public interface CarViewDtoMapper {
     })
     @Select("""
             select distinct
-                c.id_car as car_id, c.id_brand as brand_id, cb.name_brand as brad_name, cb.country as brand_country,
+                c.id_car as car_id, c.id_brand as brand_id, cb.name_brand as brand_name, cb.country as brand_country,
                 c.model_code, cm.model_name, c.color, c.buy_date, c.second_hand_car
             from cars c
             left join car_models cm on (c.id_brand = cm.id_brand and c.model_code = cm.model_code)

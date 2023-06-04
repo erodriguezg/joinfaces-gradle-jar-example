@@ -17,7 +17,7 @@
       <p:commandButton value="Add Car" action="#{indexBean.openCarDialogAction(null)}" />
     </div>
 
-    <p:dataTable id="cars" var="car" value="#{indexBean.cars}" rowKey="#{car.id}" selectionMode="single">
+    <p:dataTable id="cars" var="car" value="#{indexBean.cars}" rowKey="#{car.carId}" selectionMode="single">
       <f:facet name="header"> Cars Available </f:facet>
 
       <p:column headerText="Id">
