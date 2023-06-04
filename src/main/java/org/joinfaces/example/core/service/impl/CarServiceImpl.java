@@ -2,12 +2,14 @@ package org.joinfaces.example.core.service.impl;
 
 import java.util.List;
 
+import org.joinfaces.example.core.dto.CarViewDto;
 import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.model.CarBrand;
 import org.joinfaces.example.core.model.CarModel;
 import org.joinfaces.example.core.repository.CarBrandRepository;
 import org.joinfaces.example.core.repository.CarModelRepository;
 import org.joinfaces.example.core.repository.CarRepository;
+import org.joinfaces.example.core.repository.CarViewDtoRepository;
 import org.joinfaces.example.core.service.CarService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -23,6 +25,7 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
     private final CarBrandRepository carBrandRepository;
     private final CarModelRepository carModelRepository;
+    private final CarViewDtoRepository carViewDtoRepository;
 
     @Override
     public List<Car> getAllCars() {
@@ -52,6 +55,16 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarModel> findCarModelsByBrand(CarBrand brand) {
         return this.carModelRepository.findByBrand(brand);
+    }
+
+    @Override
+    public List<CarViewDto> findByExampleCarViewDto(CarViewDto example) {
+        return this.carViewDtoRepository.findByExampleCarViewDto(example);
+    }
+
+    @Override
+    public List<CarViewDto> getAllCarsViewsDto() {
+        return this.carViewDtoRepository.getAllCarsViewsDto();
     }
 
 }

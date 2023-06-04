@@ -5,7 +5,7 @@
   xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
   <h:outputStylesheet library="webjars" name="primeflex/3.3.0/primeflex.min.css" />
-  <h:outputStylesheet library="assets" name="css/styles.css"/>
+  <h:outputStylesheet library="assets" name="css/styles.css" />
 </h:head>
 
 <h:body>
@@ -21,16 +21,25 @@
       <f:facet name="header"> Cars Available </f:facet>
 
       <p:column headerText="Id">
-        <h:outputText value="#{car.id}" />
+        <h:outputText value="#{car.carId}" />
       </p:column>
-      <p:column headerText="Mark">
-        <h:outputText value="#{car.mark}" />
+      <p:column headerText="Brand Name">
+        <h:outputText value="#{car.brandName}" />
       </p:column>
-      <p:column headerText="Model">
-        <h:outputText value="#{car.model}" />
+      <p:column headerText="Brand Country">
+        <h:outputText value="#{car.brandCountry}" />
+      </p:column>
+      <p:column headerText="Model Name">
+        <h:outputText value="#{car.modelName}" />
       </p:column>
       <p:column headerText="Color">
         <h:outputText value="#{car.color}" />
+      </p:column>
+      <p:column headerText="Buy Date">
+        <h:outputText value="#{car.buyDate}" />
+      </p:column>
+      <p:column headerText="Is Second Hand">
+        <h:outputText value="#{car.secondHandCar}" />
       </p:column>
     </p:dataTable>
   </h:form>

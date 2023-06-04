@@ -3,7 +3,7 @@ package org.joinfaces.example.application.jsf.mbeans;
 import java.io.Serializable;
 import java.util.List;
 
-import org.joinfaces.example.core.model.Car;
+import org.joinfaces.example.core.dto.CarViewDto;
 import org.joinfaces.example.core.service.CarService;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DialogFrameworkOptions;
@@ -29,26 +29,27 @@ public class IndexBean implements Serializable {
 
     @Getter
     @Setter
-    private List<Car> cars;
+    private List<CarViewDto> cars;
 
     @PostConstruct
     public void init() {
         log.info("===> Init IndexBean");
-        this.cars = carService.getAllCars();
+        this.cars = carService.getAllCarsViewsDto();
     }
 
-    public void openCarDialogAction(Car car) {
-
+    public void openCarDialogAction(CarViewDto carView) {
         log.info("===> enter to openNewCarDialogAction");
 
+        var car = carView.toNewCar();
+
         var options = DialogFrameworkOptions.builder()
-        .modal(true)
-        .width("640")
-        .height("340")
-        .contentHeight("100%")
-        .contentWidth("100%")
-        .headerElement("customheader")
-        .build();
+                .modal(true)
+                .width("640")
+                .height("340")
+                .contentHeight("100%")
+                .contentWidth("100%")
+                .headerElement("customheader")
+                .build();
 
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("car", car);
         PrimeFaces.current().dialog().openDynamic("dialogs/saveCar", options, null);
