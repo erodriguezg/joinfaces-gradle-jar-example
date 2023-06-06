@@ -6,6 +6,7 @@ import java.util.List;
 import org.joinfaces.example.core.dto.CarViewDto;
 import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.service.CarService;
+import org.joinfaces.example.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.DialogFrameworkOptions;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class IndexBean implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(IndexBean.class);
 
+    private final JsfUtils jsfUtils;
     private final CarService carService;
 
     @Getter
@@ -41,12 +43,12 @@ public class IndexBean implements Serializable {
     public void openCarDialogAction(CarViewDto carView) {
         log.info("===> enter to openNewCarDialogAction");
 
-        var car = carView != null ? carView.toNewCar() : new Car();
+        Car car = carView != null ? carView.toNewCar() : null;
 
         var options = DialogFrameworkOptions.builder()
                 .modal(true)
-                .width("640")
-                .height("340")
+                .width("800")
+                .height("600")
                 .contentHeight("100%")
                 .contentWidth("100%")
                 .headerElement("customheader")
@@ -54,6 +56,13 @@ public class IndexBean implements Serializable {
 
         FacesContext.getCurrentInstance().getExternalContext().getFlash().put("car", car);
         PrimeFaces.current().dialog().openDynamic("dialogs/saveCar", options, null);
+    }
+
+    public void deleteCar(CarViewDto carView) {
+        var car = carView.toNewCar();
+        this.carService.deleteCar(car);
+        this.cars = this.carService.getAllCarsViewsDto();
+        this.jsfUtils.addMessage("Confirmed", "Car deleted");
     }
 
 }

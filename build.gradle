@@ -15,6 +15,7 @@ dependencies {
     implementation "org.joinfaces:jsf-spring-boot-starter"
     implementation "org.flywaydb:flyway-core"
     implementation "com.zaxxer:HikariCP"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
     implementation "org.primefaces:primefaces:${primefacesVersion}:jakarta"
     implementation "org.webjars:bootstrap:${webJarsVersion}"
     implementation "org.webjars.npm:primeflex:${primeflexVersion}"

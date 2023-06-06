@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
 <h:head>
-  <title>New Car</title>
+  <title>#{saveCarBean.dialogTitle}</title>
   <h:outputStylesheet library="webjars" name="primeflex/3.3.0/primeflex.min.css" />
+  <h:outputStylesheet library="assets" name="css/dialogs.css" />
 </h:head>
 
 <h:body>
@@ -14,19 +17,51 @@
 
     <div class="grid ui-fluid">
 
-      <div class="col-12 md:col-6">
-        <div class="field">
-          <span class="ui-float-label">
-            <p:inputText value="#{saveCarBean.car.color}" />
-            <p:outputLabel for="@previous" value="Color" />
-          </span>
+      <ui:fragment rendered="#{saveCarBean.editMode}">
+        <div class="col-12 md:col-6">
+          <div class="field">
+            <span class="ui-float-label">
+              <p:inputText value="#{saveCarBean.car.idCar}" disabled="true" />
+              <p:outputLabel for="@previous" value="Id Car" />
+            </span>
+          </div>
         </div>
+      </ui:fragment>
+
+      <div class="col-12 md:col-6">
+        <span class="ui-float-label">
+          <p:selectOneMenu id="brands" value="#{saveCarBean.car.idBrand}" autoWidth="false"
+            converter="#{jsonConverter}">
+            <f:selectItem itemLabel="" />
+            <f:selectItems value="#{saveCarBean.carBrands}" var="b" itemLabel="#{b.nameBrand}"
+              itemValue="#{b.idBrand}" />
+          </p:selectOneMenu>
+          <p:outputLabel for="@previous" value="Brand" />
+        </span>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <span class="ui-float-label">
+          <p:selectOneMenu id="colors" value="#{saveCarBean.car.color}" autoWidth="false">
+            <f:selectItem itemLabel="" itemValue="" />
+            <f:selectItem itemLabel="Red" itemValue="red" />
+            <f:selectItem itemLabel="Blue" itemValue="blue" />
+            <f:selectItem itemLabel="Yellow" itemValue="yellow" />
+            <f:selectItem itemLabel="Green" itemValue="green" />
+            <f:selectItem itemLabel="White" itemValue="white" />
+            <f:selectItem itemLabel="Black" itemValue="black" />
+          </p:selectOneMenu>
+          <p:outputLabel for="@previous" value="Color" />
+        </span>
       </div>
 
       <div class="col-12 md:col-6">
         <div class="field">
           <span class="ui-float-label">
-            <p:inputText value="#{saveCarBean.car.buyDate}" />
+            <p:datePicker value="#{saveCarBean.car.buyDate}" yearRange="1920:2023" pattern="dd/MM/yyyy" showIcon="true"
+              monthNavigator="true" yearNavigator="true">
+              <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
+            </p:datePicker>
             <p:outputLabel for="@previous" value="Buy Date" />
           </span>
         </div>
@@ -34,13 +69,16 @@
 
       <div class="col-12 md:col-6">
         <div class="field">
-          <span class="ui-float-label">
-            <p:inputText value="#{saveCarBean.car.secondHandCar}" />
-            <p:outputLabel for="@previous" value="Is Second Hand" />
-          </span>
+          <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Is Second Hand" />
         </div>
       </div>
 
+    </div>
+
+    <div class="buttons-footer">
+      <p:commandButton value="Cancel" action="#{saveCarBean.cancel()}" process="@this" styleClass="ui-button-flat mr-2"
+        style="width: 6rem" />
+      <p:commandButton value="Accept" style="width: 5rem" />
     </div>
 
   </h:form>

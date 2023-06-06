@@ -41,7 +41,26 @@
       <p:column headerText="Is Second Hand">
         <h:outputText value="#{car.secondHandCar}" />
       </p:column>
+      <p:column headerText="Actions">
+
+        <p:commandButton icon="pi pi-pencil" title="Edit Car" action="#{indexBean.openCarDialogAction(car)}"
+          styleClass="rounded-button ui-button-info ui-button-flat" />
+
+        <p:commandButton icon="pi pi-trash" title="Delete Car" action="#{indexBean.deleteCar(car)}"
+          styleClass="rounded-button ui-button-info ui-button-flat">
+          <p:confirm type="popup" header="Confirmation" message="Do you want to delete this car?"
+            icon="pi pi-info-circle" />
+        </p:commandButton>
+
+      </p:column>
     </p:dataTable>
+
+    <p:confirmPopup global="true">
+      <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat" />
+      <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+    </p:confirmPopup>
+
+    <p:growl id="message" showDetail="true" />
   </h:form>
 </h:body>
 
