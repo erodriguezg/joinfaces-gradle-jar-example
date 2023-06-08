@@ -3,10 +3,10 @@ package org.joinfaces.example.application.jsf.mbeans;
 import java.io.Serializable;
 import java.util.List;
 
+import org.joinfaces.example.application.jsf.utils.JsfUtils;
 import org.joinfaces.example.core.dto.CarViewDto;
 import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.service.CarService;
-import org.joinfaces.example.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DialogFrameworkOptions;

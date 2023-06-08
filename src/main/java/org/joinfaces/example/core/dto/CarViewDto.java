@@ -1,5 +1,6 @@
 package org.joinfaces.example.core.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import org.joinfaces.example.core.model.Car;
 import lombok.Data;
 
 @Data
-public class CarViewDto {
+public class CarViewDto implements Serializable {
 
     private UUID carId;
 

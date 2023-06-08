@@ -13,6 +13,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
     implementation "org.joinfaces:jsf-spring-boot-starter"
+    implementation "org.springframework.session:spring-session-data-redis"
     implementation "org.hibernate.validator:hibernate-validator"
     implementation "org.flywaydb:flyway-core"
     implementation "com.zaxxer:HikariCP"
@@ -28,6 +29,7 @@ dependencies {
     developmentOnly "org.springframework.boot:spring-boot-devtools"
 
     runtimeOnly "org.postgresql:postgresql"
+    runtimeOnly "io.lettuce:lettuce-core"
     
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }

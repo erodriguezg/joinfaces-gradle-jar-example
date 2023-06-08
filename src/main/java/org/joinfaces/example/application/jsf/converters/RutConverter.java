@@ -2,6 +2,7 @@ package org.joinfaces.example.application.jsf.converters;
 
 import org.joinfaces.example.utils.RutConverterUtils;
 import org.joinfaces.example.utils.RutConverterUtils.RutConverterException;
+import org.springframework.stereotype.Component;
 
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
@@ -9,12 +10,13 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.ConverterException;
 
+@Component
 public class RutConverter implements Converter<Integer> {
 
     private RutConverterUtils rutConverterUtils;
 
-    public RutConverter(RutConverterUtils rutConverterUtils) {
-        this.rutConverterUtils = rutConverterUtils;
+    public RutConverter() {
+        this.rutConverterUtils = new RutConverterUtils();
     }
 
     public Integer getAsObject(FacesContext context, UIComponent component, String value) {
