@@ -8,6 +8,7 @@ import org.joinfaces.example.core.model.Car;
 import org.joinfaces.example.core.service.CarService;
 import org.joinfaces.example.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DialogFrameworkOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,13 @@ public class IndexBean implements Serializable {
         this.carService.deleteCar(car);
         this.cars = this.carService.getAllCarsViewsDto();
         this.jsfUtils.addMessage("Confirmed", "Car deleted");
+    }
+
+    public void handleCarDialogReturn(SelectEvent<Car> event) {
+        if (event.getObject() != null) {
+            this.cars = this.carService.getAllCarsViewsDto();
+            this.jsfUtils.addMessage("Confirmed", "Car saved");
+        }
     }
 
 }

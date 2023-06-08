@@ -30,7 +30,7 @@ public class CarMybatis implements CarRepository {
             car.setIdCar(UUID.randomUUID());
             this.mapper.insertCar(car);
         } else {
-            this.mapper.deleteCar(car);
+            this.mapper.updateCar(car);
         }
     }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,14 +15,18 @@ public class Car implements Serializable {
     @EqualsAndHashCode.Include
     private UUID idCar;
 
+    @NotNull
     private Integer idBrand;
 
+    @NotNull
     private Integer modelCode;
 
     private String color;
 
+    @NotNull
     private LocalDate buyDate;
 
+    @NotNull
     private Boolean secondHandCar;
 
 }

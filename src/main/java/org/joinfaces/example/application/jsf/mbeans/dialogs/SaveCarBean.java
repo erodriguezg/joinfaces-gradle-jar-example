@@ -58,14 +58,30 @@ public class SaveCarBean implements Serializable {
         }
 
         this.carBrands = this.carService.findAllCarBrands();
+        loadCarModels();
+    }
+
+    public void changeBrand() {
+        this.car.setModelCode(null);
+        loadCarModels();
     }
 
     public void accept() {
-
+        this.carService.saveCar(this.car);
+        PrimeFaces.current().dialog().closeDynamic(this.car);
     }
 
     public void cancel() {
         PrimeFaces.current().dialog().closeDynamic(null);
+    }
+
+    private void loadCarModels() {
+        if (this.car.getIdBrand() != null) {
+            var brand = CarBrand.newInstance(this.car.getIdBrand());
+            this.carModels = this.carService.findCarModelsByBrand(brand);
+        } else {
+            this.carModels = null;
+        }
     }
 
 }

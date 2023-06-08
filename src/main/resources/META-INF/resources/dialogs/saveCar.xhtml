@@ -28,48 +28,68 @@
         </div>
       </ui:fragment>
 
-      <div class="col-12 md:col-6">
+      <h:panelGroup id="brandGroup" class="col-12 md:col-6">
         <span class="ui-float-label">
-          <p:selectOneMenu id="brands" value="#{saveCarBean.car.idBrand}" autoWidth="false"
-            converter="#{jsonConverter}">
+          <p:selectOneMenu id="brands" value="#{saveCarBean.car.idBrand}" autoWidth="false">
             <f:selectItem itemLabel="" />
             <f:selectItems value="#{saveCarBean.carBrands}" var="b" itemLabel="#{b.nameBrand}"
               itemValue="#{b.idBrand}" />
+            <p:ajax event="change" process="@this" update="brandGroup modelGroup"
+              listener="#{saveCarBean.changeBrand}" />
           </p:selectOneMenu>
           <p:outputLabel for="@previous" value="Brand" />
         </span>
-      </div>
+        <p:message id="brandsMsg" for="brands" display="text" />
+      </h:panelGroup>
 
-      <div class="col-12 md:col-6">
+      <h:panelGroup id="modelGroup" class="col-12 md:col-6">
         <span class="ui-float-label">
-          <p:selectOneMenu id="colors" value="#{saveCarBean.car.color}" autoWidth="false">
-            <f:selectItem itemLabel="" itemValue="" />
-            <f:selectItem itemLabel="Red" itemValue="red" />
-            <f:selectItem itemLabel="Blue" itemValue="blue" />
-            <f:selectItem itemLabel="Yellow" itemValue="yellow" />
-            <f:selectItem itemLabel="Green" itemValue="green" />
-            <f:selectItem itemLabel="White" itemValue="white" />
-            <f:selectItem itemLabel="Black" itemValue="black" />
+          <p:selectOneMenu id="model" value="#{saveCarBean.car.modelCode}" autoWidth="false">
+            <f:selectItem itemLabel="" />
+            <f:selectItems value="#{saveCarBean.carModels}" var="m" itemLabel="#{m.modelName}"
+              itemValue="#{m.modelCode}" />
           </p:selectOneMenu>
-          <p:outputLabel for="@previous" value="Color" />
+          <p:outputLabel for="@previous" value="Model" />
         </span>
-      </div>
+        <p:message id="modelMsg" for="model" display="text" />
+      </h:panelGroup>
 
       <div class="col-12 md:col-6">
         <div class="field">
           <span class="ui-float-label">
-            <p:datePicker value="#{saveCarBean.car.buyDate}" yearRange="1920:2023" pattern="dd/MM/yyyy" showIcon="true"
-              monthNavigator="true" yearNavigator="true">
-              <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
-            </p:datePicker>
-            <p:outputLabel for="@previous" value="Buy Date" />
+            <p:selectOneMenu id="colors" value="#{saveCarBean.car.color}" autoWidth="false">
+              <f:selectItem itemLabel="" itemValue="" />
+              <f:selectItem itemLabel="Red" itemValue="red" />
+              <f:selectItem itemLabel="Blue" itemValue="blue" />
+              <f:selectItem itemLabel="Yellow" itemValue="yellow" />
+              <f:selectItem itemLabel="Green" itemValue="green" />
+              <f:selectItem itemLabel="White" itemValue="white" />
+              <f:selectItem itemLabel="Black" itemValue="black" />
+            </p:selectOneMenu>
+            <p:outputLabel for="@previous" value="Color" />
           </span>
+          <p:message id="colorsMsg" for="colors" display="text" />
         </div>
       </div>
 
       <div class="col-12 md:col-6">
         <div class="field">
-          <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" itemLabel="Is Second Hand" />
+          <span class="ui-float-label">
+            <p:datePicker id="buyDate" value="#{saveCarBean.car.buyDate}" yearRange="1920:2023" pattern="dd/MM/yyyy"
+              showIcon="true" monthNavigator="true" yearNavigator="true">
+              <f:convertDateTime pattern="dd/MM/yyyy" type="localDate" />
+            </p:datePicker>
+            <p:outputLabel for="@previous" value="Buy Date" />
+          </span>
+          <p:message id="buyDateMsg" for="buyDate" display="text" />
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <div class="field">
+          <p:selectBooleanCheckbox id="secondHandCar" value="#{saveCarBean.car.secondHandCar}"
+            itemLabel="Is Second Hand" />
+          <p:message id="secondHandCarMsg" for="secondHandCar" display="text" />
         </div>
       </div>
 
@@ -78,7 +98,8 @@
     <div class="buttons-footer">
       <p:commandButton value="Cancel" action="#{saveCarBean.cancel()}" process="@this" styleClass="ui-button-flat mr-2"
         style="width: 6rem" />
-      <p:commandButton value="Accept" style="width: 5rem" />
+      <p:commandButton value="Accept" action="#{saveCarBean.accept()}" process="carForm" update="carForm"
+        style="width: 5rem" />
     </div>
 
   </h:form>

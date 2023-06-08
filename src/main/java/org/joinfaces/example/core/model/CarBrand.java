@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CarBrand implements Serializable {
-    
+
     @EqualsAndHashCode.Include
     private Integer idBrand;
 
@@ -16,4 +16,9 @@ public class CarBrand implements Serializable {
 
     private String country;
 
+    public static CarBrand newInstance(Integer idBrand) {
+        var carBrand = new CarBrand();
+        carBrand.setIdBrand(idBrand);
+        return carBrand;
+    }
 }

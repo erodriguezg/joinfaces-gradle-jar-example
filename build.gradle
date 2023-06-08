@@ -13,6 +13,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
     implementation "org.joinfaces:jsf-spring-boot-starter"
+    implementation "org.hibernate.validator:hibernate-validator"
     implementation "org.flywaydb:flyway-core"
     implementation "com.zaxxer:HikariCP"
     implementation "com.fasterxml.jackson.core:jackson-databind"

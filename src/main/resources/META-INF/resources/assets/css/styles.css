@@ -4,3 +4,7 @@ body {
     padding-left: 10rem;
     padding-right: 10rem;
 }
+
+.ui-growl {
+    top: 80vh !important;
+}

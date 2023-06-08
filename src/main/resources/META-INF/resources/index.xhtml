@@ -14,10 +14,13 @@
     <h1>Car Manager</h1>
 
     <div class="flex justify-content-end mb-3">
-      <p:commandButton value="Add Car" action="#{indexBean.openCarDialogAction(null)}" />
+      <p:commandButton value="Add Car" action="#{indexBean.openCarDialogAction(null)}">
+        <p:ajax event="dialogReturn" listener="#{indexBean.handleCarDialogReturn}" update="cars indexForm:growlMsg" />
+      </p:commandButton>
     </div>
 
-    <p:dataTable id="cars" var="car" value="#{indexBean.cars}" rowKey="#{car.carId}" selectionMode="single">
+    <p:dataTable id="cars" var="car" value="#{indexBean.cars}" rowKey="#{car.carId}" selectionMode="single"
+      paginator="true" rows="5" paginatorPosition="bottom">
       <f:facet name="header"> Cars Available </f:facet>
 
       <p:column headerText="Id">
@@ -43,11 +46,13 @@
       </p:column>
       <p:column headerText="Actions">
 
-        <p:commandButton icon="pi pi-pencil" title="Edit Car" action="#{indexBean.openCarDialogAction(car)}"
-          styleClass="rounded-button ui-button-info ui-button-flat" />
+        <p:commandButton icon="pi pi-pencil" title="Edit Car" process="@this"
+          action="#{indexBean.openCarDialogAction(car)}" styleClass="rounded-button ui-button-info ui-button-flat">
+          <p:ajax event="dialogReturn" listener="#{indexBean.handleCarDialogReturn}" update="cars indexForm:growlMsg" />
+        </p:commandButton>
 
-        <p:commandButton icon="pi pi-trash" title="Delete Car" action="#{indexBean.deleteCar(car)}"
-          styleClass="rounded-button ui-button-info ui-button-flat">
+        <p:commandButton icon="pi pi-trash" title="Delete Car" process="@this" update="cars indexForm:growlMsg"
+          action="#{indexBean.deleteCar(car)}" styleClass="rounded-button ui-button-info ui-button-flat">
           <p:confirm type="popup" header="Confirmation" message="Do you want to delete this car?"
             icon="pi pi-info-circle" />
         </p:commandButton>
@@ -60,7 +65,7 @@
       <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
     </p:confirmPopup>
 
-    <p:growl id="message" showDetail="true" />
+    <p:growl id="growlMsg" showDetail="true" />
   </h:form>
 </h:body>
 
