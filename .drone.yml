@@ -1,0 +1,80 @@
+kind: pipeline
+type: docker
+name: joinfaces
+
+steps:
+  - name: build-gradle
+    image: azul/zulu-openjdk:20-latest
+    volumes:
+      - name: jardist
+        path: /build/libs
+    commands:
+      - cp src/main/resources/application_template.properties src/main/resources/application.properties
+      - ./gradlew bootJar
+
+  - name: build-container-image
+    image: plugins/docker
+    settings:
+      registry:
+        from_secret: DOCKER_REGISTRY_NAME
+      username:
+        from_secret: DOCKER_REGISTRY_USERNAME
+      password:
+        from_secret: DOCKER_REGISTRY_PASSWORD
+      repo:
+        from_secret: DOCKER_REGISTRY_REPO_IMAGE
+      tags:
+        - ${DRONE_BRANCH}
+      dockerfile: docker/DockerfileCiCd
+    when:
+      branch:
+        - dev1
+        - dev2
+        - staging
+        - release
+    depends_on:
+      - build-gradle
+
+  - name: deploy-k8s-dev
+    image: erodriguezg/kubectl:1.19.5
+    environment:
+      K8S_KUBECONFIG_FILE:
+        from_secret: K8S_KUBECONFIG_FILE_DEV
+      DOCKER_REGISTRY_REPO_IMAGE:
+        from_secret: DOCKER_REGISTRY_REPO_IMAGE
+    commands:
+      - mkdir -p /root/.kube/
+      - echo "$K8S_KUBECONFIG_FILE" > /root/.kube/config
+      - IMAGE=$DOCKER_REGISTRY_REPO_IMAGE:${DRONE_BRANCH}
+      - sed -i "s,IMAGE,$IMAGE," "k8s/templates/deployment.yml"
+      - kubectl apply -f k8s/templates/deployment.yml -n joinfaces-${DRONE_BRANCH}
+    when:
+      branch:
+        - dev1
+        - dev2
+        - staging
+    depends_on:
+      - build-container-image
+
+  - name: deploy-k8s-release
+    image: erodriguezg/kubectl:1.19.5
+    environment:
+      K8S_KUBECONFIG_FILE:
+        from_secret: K8S_KUBECONFIG_FILE_RELEASE
+      DOCKER_REGISTRY_REPO_IMAGE:
+        from_secret: DOCKER_REGISTRY_REPO_IMAGE
+    commands:
+      - mkdir -p /root/.kube/
+      - echo "$K8S_KUBECONFIG_FILE" > /root/.kube/config
+      - IMAGE=$DOCKER_REGISTRY_REPO_IMAGE:${DRONE_BRANCH}
+      - sed -i "s,IMAGE,$IMAGE," "k8s/templates/deployment.yml"
+      - kubectl apply -f k8s/templates/deployment.yml -n joinfaces
+    when:
+      branch:
+        - release
+    depends_on:
+      - build-container-image
+
+volumes:
+  - name: jardist
+    temp: {}

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joinfaces-deployment
+  labels:
+    app: joinfaces-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: joinfaces-app
+  template:
+    metadata:
+      labels:
+        app: joinfaces-app
+    spec:
+      imagePullSecrets:
+        - name: nexusreg
+      containers:
+        - name: joinfaces
+          image: IMAGE
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health-check
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health-check
+              port: 8080
+          envFrom:
+            - configMapRef:
+                name: joinfaces-config-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: joinfaces-service
+  labels:
+    app: joinfaces-app
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: joinfaces-app
