@@ -4,13 +4,12 @@ name: joinfaces
 
 steps:
   - name: build-gradle
-    image: gradle:jdk17
+    image: gradle:jdk19
     volumes:
       - name: jardist
         path: /build/libs
     commands:
       - cp src/main/resources/application_template.properties src/main/resources/application.properties
-      - java -version
       - gradle -version
       - gradle bootJar
 
