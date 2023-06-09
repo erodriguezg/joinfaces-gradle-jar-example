@@ -4,7 +4,7 @@ name: joinfaces
 
 steps:
   - name: build-gradle
-    image: azul/zulu-openjdk:20-latest
+    image: azul/zulu-openjdk:19-latest
     volumes:
       - name: jardist
         path: /build/libs
