@@ -10,6 +10,8 @@ steps:
         path: /build/libs
     commands:
       - cp src/main/resources/application_template.properties src/main/resources/application.properties
+      - java -version
+      - gradle -version
       - gradle bootJar
 
   - name: build-container-image
