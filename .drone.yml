@@ -4,7 +4,7 @@ name: joinfaces
 
 steps:
   - name: build-gradle
-    image: gradle:jdk20
+    image: gradle:jdk19
     volumes:
       - name: jardist
         path: /build/libs
