@@ -4,13 +4,13 @@ name: joinfaces
 
 steps:
   - name: build-gradle
-    image: azul/zulu-openjdk:19-latest
+    image: gradle:jdk19
     volumes:
       - name: jardist
         path: /build/libs
     commands:
       - cp src/main/resources/application_template.properties src/main/resources/application.properties
-      - ./gradlew bootJar
+      - gradle bootJar
 
   - name: build-container-image
     image: plugins/docker
