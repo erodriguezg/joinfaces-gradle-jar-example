@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "naumovs.color-highlight",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-gradle",
+    "leosj29.jsf-primefaces-intellisense",
+    "vscjava.vscode-lombok"
+  ]
+}
