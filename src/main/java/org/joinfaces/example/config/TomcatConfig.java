@@ -26,6 +26,9 @@ public class TomcatConfig {
             @Override
             protected void postProcessContext(Context context) {
 
+                logger.info("Setting distributable Web.xml to true");
+                context.setDistributable(true);
+
                 logger.info("Initializing jsf/FlashSecretKey in postProcessContext");
                 // adding <env-entry>
                 ContextEnvironment ce = new ContextEnvironment();
