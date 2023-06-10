@@ -55,7 +55,7 @@ public class IndexBean implements Serializable {
                 .headerElement("customheader")
                 .build();
 
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("carIdString", carIdString);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("carIdString", carIdString);
         PrimeFaces.current().dialog().openDynamic("dialogs/saveCar", options, null);
     }
 

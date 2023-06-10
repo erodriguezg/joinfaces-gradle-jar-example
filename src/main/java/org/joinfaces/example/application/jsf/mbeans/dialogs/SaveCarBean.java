@@ -48,7 +48,10 @@ public class SaveCarBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        var carIdString = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("carIdString");
+        var sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        var carIdString = (String) sessionMap.get("carIdString");
+        sessionMap.remove("carIdString");
+
         if (carIdString == null) {
             this.car = new Car();
             this.dialogTitle = "New Car";
