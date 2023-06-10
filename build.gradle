@@ -1,6 +1,6 @@
 plugins {
     id "java"
-    id "org.joinfaces" version "5.0.6"
+    id "org.joinfaces" version "5.1.0"
 }
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -10,6 +10,12 @@ repositories {
 }
 
 dependencies {
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
+    }
+
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
     implementation "org.joinfaces:jsf-spring-boot-starter"

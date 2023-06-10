@@ -34,5 +34,5 @@ COPY "./build/libs/*.jar" "/app.jar"
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+ENTRYPOINT [ "java", "--enable-preview", "-jar", "app.jar" ]
 CMD [ "-XX:+UseParallelGC", "-noverify", "-XX:TieredStopAtLevel=1", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=80" ]
