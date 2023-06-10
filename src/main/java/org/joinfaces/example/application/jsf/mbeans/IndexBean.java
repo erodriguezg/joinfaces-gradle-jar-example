@@ -44,7 +44,7 @@ public class IndexBean implements Serializable {
     public void openCarDialogAction(CarViewDto carView) {
         log.info("===> enter to openNewCarDialogAction");
 
-        Car car = carView != null ? carView.toNewCar() : null;
+        String carIdString = carView != null ? carView.toNewCar().getIdCar().toString() : null;
 
         var options = DialogFrameworkOptions.builder()
                 .modal(true)
@@ -55,7 +55,7 @@ public class IndexBean implements Serializable {
                 .headerElement("customheader")
                 .build();
 
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("car", car);
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("carIdString", carIdString);
         PrimeFaces.current().dialog().openDynamic("dialogs/saveCar", options, null);
     }
 

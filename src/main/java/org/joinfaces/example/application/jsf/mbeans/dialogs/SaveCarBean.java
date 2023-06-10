@@ -2,6 +2,7 @@ package org.joinfaces.example.application.jsf.mbeans.dialogs;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import org.joinfaces.example.application.jsf.mbeans.ScopeTypes;
 import org.joinfaces.example.core.model.Car;
@@ -47,12 +48,14 @@ public class SaveCarBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.car = (Car) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("car");
-        if (this.car == null) {
+        var carIdString = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("carIdString");
+        if (carIdString == null) {
             this.car = new Car();
             this.dialogTitle = "New Car";
             this.editMode = false;
         } else {
+            var uuid = UUID.fromString(carIdString);
+            this.car = this.carService.findCarById(uuid);
             this.dialogTitle = "Edit Car";
             this.editMode = true;
         }

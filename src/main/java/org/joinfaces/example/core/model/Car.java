@@ -29,4 +29,10 @@ public class Car implements Serializable {
     @NotNull
     private Boolean secondHandCar;
 
+    public static Car newInstance(UUID idCar) {
+        var car = new Car();
+        car.setIdCar(idCar);
+        return car;
+    }
+
 }

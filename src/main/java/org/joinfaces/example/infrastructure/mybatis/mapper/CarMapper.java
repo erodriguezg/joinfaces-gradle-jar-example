@@ -1,12 +1,15 @@
 package org.joinfaces.example.infrastructure.mybatis.mapper;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.joinfaces.example.core.model.Car;
@@ -45,7 +48,11 @@ public interface CarMapper {
             @Result(property = "buyDate", column = "buy_date"),
             @Result(property = "secondHandCar", column = "second_hand_car")
     })
+    @Select("select * from cars where id_car = #{idCar}")
+    Car findCarById(UUID idCar);
+
     @SelectProvider(type = CarMapper.class, method = "findByExampleProvider")
+    @ResultMap("carMapperResults")
     List<Car> findByExample(Car exampleCar);
 
     static String findByExampleProvider(Car exampleCar) {

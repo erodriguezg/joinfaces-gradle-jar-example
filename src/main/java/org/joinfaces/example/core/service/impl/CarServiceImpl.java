@@ -1,6 +1,7 @@
 package org.joinfaces.example.core.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.joinfaces.example.core.dto.CarViewDto;
 import org.joinfaces.example.core.model.Car;
@@ -65,6 +66,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarViewDto> getAllCarsViewsDto() {
         return this.carViewDtoRepository.getAllCarsViewsDto();
+    }
+
+    @Override
+    public Car findCarById(UUID idCar) {
+        return this.carRepository.findCarById(idCar);
     }
 
 }

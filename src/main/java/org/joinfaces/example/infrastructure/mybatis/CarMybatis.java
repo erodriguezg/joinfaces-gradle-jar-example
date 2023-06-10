@@ -39,4 +39,9 @@ public class CarMybatis implements CarRepository {
         this.mapper.deleteCar(car);
     }
 
+    @Override
+    public Car findCarById(UUID idCar) {
+        return this.mapper.findCarById(idCar);
+    }
+
 }
