@@ -50,6 +50,7 @@ steps:
       - IMAGE=$DOCKER_REGISTRY_REPO_IMAGE:${DRONE_BRANCH}
       - sed -i "s,IMAGE,$IMAGE," "k8s/templates/deployment.yml"
       - kubectl apply -f k8s/templates/deployment.yml -n joinfaces-${DRONE_BRANCH}
+      - kubectl rollout restart deployment joinfaces-deployment -n joinfaces-${DRONE_BRANCH}
     when:
       branch:
         - dev1
@@ -71,6 +72,7 @@ steps:
       - IMAGE=$DOCKER_REGISTRY_REPO_IMAGE:${DRONE_BRANCH}
       - sed -i "s,IMAGE,$IMAGE," "k8s/templates/deployment.yml"
       - kubectl apply -f k8s/templates/deployment.yml -n joinfaces
+      - kubectl rollout restart deployment joinfaces-deployment -n joinfaces
     when:
       branch:
         - release
